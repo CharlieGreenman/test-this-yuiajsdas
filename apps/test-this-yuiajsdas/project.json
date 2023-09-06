@@ -1,0 +1,95 @@
+{
+  "name": "test-this-yuiajsdas",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/test-this-yuiajsdas/src",
+  "prefix": "test-this-yuiajsdas",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/test-this-yuiajsdas",
+        "index": "apps/test-this-yuiajsdas/src/index.html",
+        "main": "apps/test-this-yuiajsdas/src/main.ts",
+        "polyfills": "apps/test-this-yuiajsdas/src/polyfills.ts",
+        "tsConfig": "apps/test-this-yuiajsdas/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/test-this-yuiajsdas/src/favicon.ico",
+          "apps/test-this-yuiajsdas/src/assets"
+        ],
+        "styles": ["apps/test-this-yuiajsdas/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/test-this-yuiajsdas/src/environments/environment.ts",
+              "with": "apps/test-this-yuiajsdas/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "test-this-yuiajsdas:build:production"
+        },
+        "development": {
+          "browserTarget": "test-this-yuiajsdas:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "test-this-yuiajsdas:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/test-this-yuiajsdas/src/**/*.ts",
+          "apps/test-this-yuiajsdas/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/test-this-yuiajsdas"],
+      "options": {
+        "jestConfig": "apps/test-this-yuiajsdas/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
